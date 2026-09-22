@@ -1,0 +1,262 @@
+/* ==========================================================================
+   METEO OUTFIT - Structural Minimalist (Mies van der Rohe Style)
+   High Contrast Pastel Diagonal Gradient Edition
+   ========================================================================== */
+
+/* 1. VARIABLES & PALETA ARQUITECTÓNICA */
+:root {
+  /* Tipografía estilo Apple San Francisco / System UI */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+               "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", "Consolas", "Courier New", monospace;
+
+  /* Estructura (Perfil de acero negro) */
+  --color-dark: #121212;
+  --color-border: #121212;
+
+  /* Fondo Inicial: Verde pálido mate y sutil */
+  --bg-initial: #dbe4dc;
+
+  /* Gradiente para texto por defecto */
+  --text-gradient-default: linear-gradient(135deg, #121212 0%, #3a3a3a 50%, #121212 100%);
+}
+
+/* 2. RESET Y BASES */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-initial);
+  color: var(--color-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.8s ease;
+}
+
+/* 3. ANIMACIÓN DE GRADIENTE DIAGONAL EN BUCLE PARA EL FONDO */
+@keyframes gradientDiagonal {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Estado Frío (<15°C): Mayor rango de azul escarcha claro a azul acero helado */
+body[data-clima="frio"] {
+  background: linear-gradient(135deg, #6c9ebb 0%, #e2f1f8 35%, #4b7893 70%, #b3d7ea 100%);
+  background-size: 230% 230%;
+  animation: gradientDiagonal 10s ease-in-out infinite;
+}
+
+/* Estado Templado (<25°C): Mayor rango de verde crema a verde salvia/liquen profundo */
+body[data-clima="templado"] {
+  background: linear-gradient(135deg, #81a47b 0%, #ebf4ea 35%, #597a53 70%, #bad8b5 100%);
+  background-size: 230% 230%;
+  animation: gradientDiagonal 10s ease-in-out infinite;
+}
+
+/* Estado Cálido (≥25°C): Mayor rango de arena pastel a terracota/durazno tostado */
+body[data-clima="calido"] {
+  background: linear-gradient(135deg, #e39a80 0%, #fef1eb 35%, #bd6c50 70%, #f5c4b3 100%);
+  background-size: 230% 230%;
+  animation: gradientDiagonal 10s ease-in-out infinite;
+}
+
+/* 4. CONTENEDOR PRINCIPAL: Estructura marco de cristal y acero */
+.contenedor {
+  background: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 460px;
+  padding: 3.5rem 3rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0px; /* Geometría recta pura */
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+/* Microetiqueta técnica superior estilo plano de arquitectura */
+.contenedor::before {
+  content: "01 / OUTFIT RECOMMENDER";
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-dark);
+  opacity: 0.55;
+}
+
+/* 5. TITULAR */
+h1 {
+  font-size: 1.65rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--color-dark);
+}
+
+/* 6. INPUT MINIMALISTA */
+input[type="text"] {
+  width: 100%;
+  padding: 0.9rem 0;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--color-dark);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]::placeholder {
+  color: #888888;
+  font-weight: 300;
+}
+
+input[type="text"]:focus {
+  border-bottom: 2px solid var(--color-dark);
+}
+
+/* 7. BOTÓN NEGRO CON GRADIENTE DIAGONAL EN HOVER */
+button {
+  width: 100%;
+  padding: 1.15rem 1.5rem;
+  margin-top: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-dark);
+  border-radius: 0px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+/* Capa del gradiente diagonal a 135° en Hover */
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #121212 0%, #25382e 50%, #445d4f 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+button:hover::before {
+  opacity: 1;
+}
+
+button:active {
+  transform: scale(0.995);
+}
+
+/* 8. ÁREA DE MENSAJE CON TEXTO EN GRADIENTE DIAGONAL ANIMADO */
+#mensaje {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.5;
+  min-height: 1.5rem;
+  margin-top: 0.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(18, 18, 18, 0.15);
+  color: var(--color-dark);
+}
+
+/* Animación del gradiente diagonal en el texto cuando hay contenido */
+#mensaje:not(:empty) {
+  background-image: var(--text-gradient-default);
+  background-size: 230% 230%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradientDiagonal 8s ease-in-out infinite, fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Gradientes oscuros intensos para el texto según el clima */
+body[data-clima="frio"] #mensaje:not(:empty) {
+  background-image: linear-gradient(135deg, #091e2b 0%, #205370 40%, #030d14 70%, #091e2b 100%);
+}
+
+body[data-clima="templado"] #mensaje:not(:empty) {
+  background-image: linear-gradient(135deg, #0e240d 0%, #315c2e 40%, #061205 70%, #0e240d 100%);
+}
+
+body[data-clima="calido"] #mensaje:not(:empty) {
+  background-image: linear-gradient(135deg, #3d170d 0%, #7d351f 40%, #210803 70%, #3d170d 100%);
+}
+
+/* Keyframe para el movimiento diagonal del texto */
+@keyframes textGradientDiagonal {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Keyframe para la aparición progresiva del mensaje */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 9. ADAPTABILIDAD RESPONSIVE */
+@media (max-width: 480px) {
+  .contenedor {
+    padding: 2.5rem 1.75rem;
+  }
+
+  h1 {
+    font-size: 1.38rem;
+  }
+
+  #mensaje {
+    font-size: 0.98rem;
+  }
+}
